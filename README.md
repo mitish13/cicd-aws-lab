@@ -1,7 +1,13 @@
-## Steps Performed in AWS Console to Host the Website Manually
+# Obejctive
+The aim of this project is to learn and practice concepts of GitHub Actions and AWS Services
 
+## Current(Intial) Version setup:
+- A Simple index.html file is being served using Amazon S3 and CloudFront
+- A GitHub Actions ci/cd is placed that will automatically going to update the website on ``code push to main branch``
+
+### Steps Performed in AWS Console to Host the Website Manually
 1. Sign in to the AWS Console using the **root account**.
-2. Create a new **IAM user** with:
+2. Create a new **IAM user** with(least privilege):
    - Full S3 access
    - CloudFront access
 3. Sign in to the AWS Console using the **new user credentials**.
@@ -15,3 +21,18 @@
       > This tells CloudFront which object to serve when a user accesses the distribution DNS.
 8. Access your website via the **CloudFront DNS**, which now serves `index.html` through the CDN.
 > **Blocked public access of S3 and OAC ensures that only cloudfront distribution can access S3 objects**
+
+### Steps performed to build ci/cd workflow using GitHub Actions
+1. First create AWS User access keys and password through AWS Console for above AWS User
+2. Download csv file into project folder; makesure add that into .gitignore
+3. Now create all the required variables for workflow inside GitHub ``Repository Secrets`` to inject into workflow file securely; no hardcoded values
+   - AWS_ACCESS_KEY_ID
+   - AWS_REGION
+   - AWS_SECRET_ACCESS_KEY
+   - CLOUDFRONT_DISTRIBUTION_ID
+   - S3_BUCKET_NAME
+4. Create yml workflow file under .github/workflows directory
+5. commit and push; check the status of worlflow file inside github repo 
+
+## Checkout the live website:
+https://diwihxs8zdk4e.cloudfront.net/

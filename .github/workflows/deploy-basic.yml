@@ -1,0 +1,35 @@
+# Every workflow .yml file needs to have three things. Workflow means cicd pipeline 
+# 1. on(A trigger- Event,i.e. push, pull, merge) , 2. jobs - job-id(Job identifier) 3. runs-on (a remote machine where workflow runs on)
+
+name: Deploys website served by AWS CloudFront and S3
+on:
+  push:
+      branches:
+        - main
+
+jobs:
+    deploy:
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: Checkout repository
+          uses: actions/checkout@v6
+        # This step clone your GitHub repository into the workflow runner
+        # Always needed as first step when the workflow requires access to the repository's content
+
+        - name: Configure AWS credentials to access S3 and CloudFront
+          uses: aws-actions/configure-aws-credentials@v5.1.1
+          with:
+              aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+              aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+              aws-region: ${{ secrets.AWS_REGION }}
+
+        - name: Copy files to S3 bucket from 'src' directory
+          run: |
+              aws s3 sync ./src s3://${{secrets.S3_BUCKET_NAME}} --delete
+        # cmd used: aws s3 sync ./src s3://your-bucket-name --delete; this syncs the contents of the local 'src' directory to the specified S3 bucket, deleting any files in the bucket that are not present in the 'src' directory.
+
+        - name: Invalidate CloudFront cache
+          run: |
+            aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
+        # cmd used: aws cloudfront create-invalidation --distribution-id YOUR_DISTRIBUTION_ID --paths "/*"; this command creates an invalidation request for the specified CloudFront distribution, effectively clearing the cache for all files (indicated by "/*") so that the latest versions from the S3 bucket are served.
