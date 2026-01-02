@@ -1,5 +1,5 @@
 # Obejctive
-The aim of this project is to learn and practice concepts of GitHub Actions and AWS Services
+The aim of this project is to learn and practice concepts of GitHub Actions, Docker, AWS Services and other DevOps and Cloud tools/concepts. 
 
 ## Current(Intial) Version setup:
 - A Simple index.html file is being served using Amazon S3 and CloudFront
