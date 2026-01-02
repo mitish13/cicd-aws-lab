@@ -34,5 +34,15 @@ The aim of this project is to learn and practice concepts of GitHub Actions and 
 4. Create yml workflow file under .github/workflows directory
 5. commit and push; check the status of worlflow file inside github repo 
 
+## Steps to run the docker container
+1. Go inside project directory where Dockerfile exists
+```bash
+# build the docker image
+docker build -t cicd-aws-lab
+# run the container; map host port 80 to container port 80
+docker run -p 80:80 cicd-aws-lab
+```
+2. now go to your [localhost](http://localhost/); you should see the webpage being served there
+
 ## Checkout the live website:
 https://diwihxs8zdk4e.cloudfront.net/
