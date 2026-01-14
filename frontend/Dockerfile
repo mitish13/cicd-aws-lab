@@ -6,7 +6,7 @@ FROM nginx:alpine
 RUN rm -rf /usr/share/nginx/html/* 
 
 # copy our index.html file to the default nginx html directory
-COPY src/index.html /usr/share/nginx/html/
+COPY index.html /usr/share/nginx/html/
 
 # Both below commands is optional
 

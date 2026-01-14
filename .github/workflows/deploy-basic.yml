@@ -26,7 +26,7 @@ jobs:
 
         - name: Copy files to S3 bucket from 'src' directory
           run: |
-              aws s3 sync ./src s3://${{secrets.S3_BUCKET_NAME}} --delete
+              aws s3 sync ./frontend s3://${{secrets.S3_BUCKET_NAME}} --delete
         # cmd used: aws s3 sync ./src s3://your-bucket-name --delete; this syncs the contents of the local 'src' directory to the specified S3 bucket, deleting any files in the bucket that are not present in the 'src' directory.
 
         - name: Invalidate CloudFront cache
