@@ -1,11 +1,11 @@
-# Obejctive
+# Objective
 The aim of this project is to learn and practice concepts of GitHub Actions and AWS Services
 
 ## Current(Intial) Version setup:
 - A Simple index.html file is being served using Amazon S3 and CloudFront
 - A GitHub Actions ci/cd is placed that will automatically going to update the website on ``code push to main branch``
 
-### Steps Performed in AWS Console to Host the Website Manually
+### Steps Performed in AWS Console to Host the Frontend Manually
 1. Sign in to the AWS Console using the **root account**.
 2. Create a new **IAM user** with(least privilege):
    - Full S3 access
